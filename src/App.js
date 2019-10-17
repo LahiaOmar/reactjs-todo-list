@@ -1,26 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
+import Action from './component/Action'
 import './App.css';
+import DoAction from './component/DoAction'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+    actions: []
+  }
+
+  addActions = (act) => {
+    console.log("action add ", act)
+
+    const actions = [...this.state.actions]
+
+    actions.push(act)
+
+    this.setState({ actions })
+
+    console.log("new state : ", this.state)
+
+  }
+
+  render() {
+    return (
+      <div className="App" >
+        <p>TODO LIST</p>
+        {this.state.actions.map(key => <DoAction key={key} action={key} />)}
+        <Action addActions={this.addActions} />
+      </div>
+    )
+  }
+
 }
 
 export default App;
